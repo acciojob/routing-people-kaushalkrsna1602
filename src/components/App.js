@@ -10,13 +10,21 @@ const App = () => {
 
   // Fetch data when the component mounts for the first time
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((resp) => resp.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
         setUsers(data);
         setLoading(false);
-      });
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+  
+    fetchData();
   }, []);
+  
 
   return (
     <div>
