@@ -1,10 +1,7 @@
 import React from "react";
-import { NavLink, Route } from "react-router-dom";
-import Users from "./Users";
+import { NavLink } from "react-router-dom";
 
 function UserDetails({ users }) {
-  // const user = users.find(u => u.id === parseInt(users.id, 10));
-
   return (
     <div>
       <h1>User List</h1>

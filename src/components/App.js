@@ -8,9 +8,9 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch data when the component mounts for the first time
+  // Fetch the list of users when the component mounts
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUsers = async () => {
       try {
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -21,21 +21,19 @@ const App = () => {
         console.error("Error fetching users:", error);
       }
     };
-  
-    fetchData();
+
+    fetchUsers();
   }, []);
-  
 
   return (
     <div>
-      {/* Do not remove the main div */}
       <Router>
         {loading ? (
           <h1>Loading...</h1>
         ) : (
           <Routes>
             <Route path="/" element={<UserDetails users={users} />} />
-            <Route path="/users/:id" element={<Users users={users} />} />
+            <Route path="/users/:id" element={<Users />} />
           </Routes>
         )}
       </Router>
